@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState}  from 'react';
 
-function App() {
+const App = () => {
+  const [textareaValue, setTextareaValue] = useState("")
+  const [notes, setNotes] = useState([])
+  const listItems = notes.map((note, i) => <li key={i}>{note}</li>)
+  const storeEnteredText = (event) => {
+    setTextareaValue(event.currentTarget.value)
+  }
+
+  const handleButtonClick = (event) => {
+    setNotes([...notes, textareaValue])
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <textarea onChange={storeEnteredText}></textarea>
+      <button onClick={handleButtonClick}>Add</button>
+      <ul>{listItems}</ul>
     </div>
   );
 }
